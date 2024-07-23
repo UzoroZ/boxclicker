@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Square</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #gameArea {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background: #ddd;
+        }
+        #square {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+        #score {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameArea">
+        <div id="square"></div>
+    </div>
+    <div id="score">Score: 0</div>
+    <script>
+        const square = document.getElementById('square');
+        const scoreDisplay = document.getElementById('score');
+        let score = 0;
+
+        function moveSquare() {
+            const gameArea = document.getElementById('gameArea');
+            const maxX = gameArea.clientWidth - square.clientWidth;
+            const maxY = gameArea.clientHeight - square.clientHeight;
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            square.style.left = `${newX}px`;
+            square.style.top = `${newY}px`;
+        }
+
+        square.addEventListener('click', () => {
+            score++;
+            scoreDisplay.innerText = `Score: ${score}`;
+            moveSquare();
+        });
+
+        moveSquare(); // Initial position
+    </script>
+</body>
+</html>
